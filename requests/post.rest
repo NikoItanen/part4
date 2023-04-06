@@ -1,0 +1,9 @@
+POST http://localhost:3003/api/blogs HTTP/1.1
+Content-Type: application/json
+
+{
+    "title": "Testi",
+    "author": "Testaaja",
+    "url": "https://wwww.testiblogi.com",
+    "number": 0
+}
