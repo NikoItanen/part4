@@ -1,7 +1,7 @@
-const router = require('express').Router()
+const blogsRouter = require('express').Router()
 const Blog = require('../models/blog')
 
-router.get('/', async (request, response, next) => {
+blogsRouter.get('/', async (request, response, next) => {
     try {
         const blogs = await Blog.find({})
         response.json(blogs.map(blog => blog.toJSON()))
@@ -10,7 +10,7 @@ router.get('/', async (request, response, next) => {
     }
 })
 
-router.post('/', async (request, response, next) => {
+blogsRouter.post('/', async (request, response, next) => {
     const body = request.body
   
     const blog = new Blog({
@@ -28,7 +28,7 @@ router.post('/', async (request, response, next) => {
     }
 })
 
-router.get('/:id', async (request, response) => {
+blogsRouter.get('/:id', async (request, response) => {
     const blog = await Blog.findById(request.params.id)
     if (!blog) {
         throw new Error('Blog not found')
@@ -36,7 +36,7 @@ router.get('/:id', async (request, response) => {
     response.json(blog.toJSON())
 })
 
-router.delete('/:id', async (request, response, next) => {
+blogsRouter.delete('/:id', async (request, response, next) => {
     try {
         await Blog.findByIdAndRemove(request.params.id)
         response.status(204).end()
@@ -46,7 +46,7 @@ router.delete('/:id', async (request, response, next) => {
 })
 
 
-router.patch('/:id', async (request, response, next) => {
+blogsRouter.patch('/:id', async (request, response, next) => {
     const updates = request.body
     
     try {
@@ -60,4 +60,4 @@ router.patch('/:id', async (request, response, next) => {
     }
 })
 
-module.exports = router
+module.exports = blogsRouter
